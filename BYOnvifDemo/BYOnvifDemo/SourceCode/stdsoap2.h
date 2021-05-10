@@ -891,6 +891,9 @@ extern intmax_t __strtoull(const char*, char**, int);
 # include <fcgi_stdio.h>
 #endif
 
+// 手动定义
+#define WITH_OPENSSL 1
+
 #ifdef WITH_OPENSSL
 # ifdef __VMS
 #  pragma names save

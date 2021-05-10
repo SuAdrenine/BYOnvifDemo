@@ -25,6 +25,12 @@
 		EA19D1D526491F3F00BBEA96 /* struct_tm.c in Sources */ = {isa = PBXBuildFile; fileRef = EA19D1C926491F3F00BBEA96 /* struct_tm.c */; };
 		EA19D1D626491F3F00BBEA96 /* stdsoap2.c in Sources */ = {isa = PBXBuildFile; fileRef = EA19D1CC26491F3F00BBEA96 /* stdsoap2.c */; };
 		EA19D1DA26491F8900BBEA96 /* BYDeviceInfo.c in Sources */ = {isa = PBXBuildFile; fileRef = EA19D1D926491F8900BBEA96 /* BYDeviceInfo.c */; };
+		EA19D1F82649376F00BBEA96 /* mecevp.c in Sources */ = {isa = PBXBuildFile; fileRef = EA19D1F12649376F00BBEA96 /* mecevp.c */; };
+		EA19D1F92649376F00BBEA96 /* wsseapi.c in Sources */ = {isa = PBXBuildFile; fileRef = EA19D1F22649376F00BBEA96 /* wsseapi.c */; };
+		EA19D1FA2649376F00BBEA96 /* smdevp.c in Sources */ = {isa = PBXBuildFile; fileRef = EA19D1F32649376F00BBEA96 /* smdevp.c */; };
+		EA19D1FB2649376F00BBEA96 /* dom.c in Sources */ = {isa = PBXBuildFile; fileRef = EA19D1F42649376F00BBEA96 /* dom.c */; };
+		EA19D1FC2649376F00BBEA96 /* threads.c in Sources */ = {isa = PBXBuildFile; fileRef = EA19D1F72649376F00BBEA96 /* threads.c */; };
+		EA19D1FE2649377A00BBEA96 /* openssl.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EA19D1FD2649377A00BBEA96 /* openssl.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -60,6 +66,16 @@
 		EA19D1D826491F8900BBEA96 /* BYDeviceInfo.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BYDeviceInfo.h; sourceTree = "<group>"; };
 		EA19D1D926491F8900BBEA96 /* BYDeviceInfo.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = BYDeviceInfo.c; sourceTree = "<group>"; };
 		EA19D1DC26491FB500BBEA96 /* BYCommonDefine.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BYCommonDefine.h; sourceTree = "<group>"; };
+		EA19D1EF2649376F00BBEA96 /* smdevp.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = smdevp.h; sourceTree = "<group>"; };
+		EA19D1F02649376F00BBEA96 /* threads.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = threads.h; sourceTree = "<group>"; };
+		EA19D1F12649376F00BBEA96 /* mecevp.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = mecevp.c; sourceTree = "<group>"; };
+		EA19D1F22649376F00BBEA96 /* wsseapi.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = wsseapi.c; sourceTree = "<group>"; };
+		EA19D1F32649376F00BBEA96 /* smdevp.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = smdevp.c; sourceTree = "<group>"; };
+		EA19D1F42649376F00BBEA96 /* dom.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = dom.c; sourceTree = "<group>"; };
+		EA19D1F52649376F00BBEA96 /* wsseapi.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = wsseapi.h; sourceTree = "<group>"; };
+		EA19D1F62649376F00BBEA96 /* mecevp.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = mecevp.h; sourceTree = "<group>"; };
+		EA19D1F72649376F00BBEA96 /* threads.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = threads.c; sourceTree = "<group>"; };
+		EA19D1FD2649377A00BBEA96 /* openssl.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = openssl.framework; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -67,6 +83,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				EA19D1FE2649377A00BBEA96 /* openssl.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -92,6 +109,8 @@
 		EA19D1A026491EF900BBEA96 /* BYOnvifDemo */ = {
 			isa = PBXGroup;
 			children = (
+				EA19D1FD2649377A00BBEA96 /* openssl.framework */,
+				EA19D1EE2649376F00BBEA96 /* plugin */,
 				EA19D1D726491F6500BBEA96 /* CustomCode */,
 				EA19D1BA26491F3F00BBEA96 /* SourceCode */,
 				EA19D1A126491EF900BBEA96 /* AppDelegate.h */,
@@ -149,6 +168,22 @@
 				EA19D1D926491F8900BBEA96 /* BYDeviceInfo.c */,
 			);
 			path = CustomCode;
+			sourceTree = "<group>";
+		};
+		EA19D1EE2649376F00BBEA96 /* plugin */ = {
+			isa = PBXGroup;
+			children = (
+				EA19D1EF2649376F00BBEA96 /* smdevp.h */,
+				EA19D1F02649376F00BBEA96 /* threads.h */,
+				EA19D1F12649376F00BBEA96 /* mecevp.c */,
+				EA19D1F22649376F00BBEA96 /* wsseapi.c */,
+				EA19D1F32649376F00BBEA96 /* smdevp.c */,
+				EA19D1F42649376F00BBEA96 /* dom.c */,
+				EA19D1F52649376F00BBEA96 /* wsseapi.h */,
+				EA19D1F62649376F00BBEA96 /* mecevp.h */,
+				EA19D1F72649376F00BBEA96 /* threads.c */,
+			);
+			path = plugin;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -224,13 +259,18 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				EA19D1FB2649376F00BBEA96 /* dom.c in Sources */,
 				EA19D1CF26491F3F00BBEA96 /* wsaapi.c in Sources */,
 				EA19D1A926491EF900BBEA96 /* ViewController.m in Sources */,
 				EA19D1CE26491F3F00BBEA96 /* soapC.c in Sources */,
 				EA19D1D126491F3F00BBEA96 /* duration.c in Sources */,
+				EA19D1FC2649376F00BBEA96 /* threads.c in Sources */,
 				EA19D1D526491F3F00BBEA96 /* struct_tm.c in Sources */,
+				EA19D1F82649376F00BBEA96 /* mecevp.c in Sources */,
+				EA19D1FA2649376F00BBEA96 /* smdevp.c in Sources */,
 				EA19D1A326491EF900BBEA96 /* AppDelegate.m in Sources */,
 				EA19D1B426491EFC00BBEA96 /* main.m in Sources */,
+				EA19D1F92649376F00BBEA96 /* wsseapi.c in Sources */,
 				EA19D1A626491EF900BBEA96 /* SceneDelegate.m in Sources */,
 				EA19D1D226491F3F00BBEA96 /* soapClient.c in Sources */,
 				EA19D1D626491F3F00BBEA96 /* stdsoap2.c in Sources */,
@@ -379,6 +419,10 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = ZX35RMK248;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/BYOnvifDemo",
+				);
 				INFOPLIST_FILE = BYOnvifDemo/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -397,6 +441,10 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = ZX35RMK248;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/BYOnvifDemo",
+				);
 				INFOPLIST_FILE = BYOnvifDemo/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",

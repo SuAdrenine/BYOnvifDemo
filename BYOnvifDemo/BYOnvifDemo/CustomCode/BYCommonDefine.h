@@ -13,6 +13,10 @@
 #include <assert.h>
 #include "soapH.h"
 #include "wsaapi.h"
+#include "wsseapi.h"
+
+#define BYUSERNAME "admin"
+#define BYPASSWORD "ky123456"
 
 #define SOAP_ASSERT     assert
 #define SOAP_DBGLOG     printf

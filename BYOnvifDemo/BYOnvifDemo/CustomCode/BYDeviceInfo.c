@@ -165,6 +165,66 @@ void ONVIF_DetectDevice(void (*cb)(char *DeviceXAddr))
 
     return ;
 }
+//
+///************************************************************************
+//**函数：ONVIF_GetDeviceInformation
+//**功能：获取设备基本信息
+//**参数：
+//        [in] DeviceXAddr - 设备服务地址
+//**返回：
+//        0表明成功，非0表明失败
+//**备注：
+//************************************************************************/
+//int ONVIF_GetDeviceInformation(const char *DeviceXAddr)
+//{
+//    int result = 0;
+//    struct soap *soap = NULL;
+//    struct _tds__GetDeviceInformation           devinfo_req;
+//    struct _tds__GetDeviceInformationResponse   devinfo_resp;
+//
+//    SOAP_ASSERT(NULL != DeviceXAddr);
+//SOAP_ASSERT(NULL != (soap = ONVIF_soap_new(SOAP_SOCK_TIMEOUT)));
+//
+//    memset(&devinfo_req, 0x00, sizeof(devinfo_req));
+//    memset(&devinfo_resp, 0x00, sizeof(devinfo_resp));
+//    result = soap_call___tds__GetDeviceInformation(soap, DeviceXAddr, NULL, &devinfo_req, &devinfo_resp);
+//    SOAP_CHECK_ERROR(result, soap, "GetDeviceInformation");
+//
+//    SOAP_DBGLOG("===>\n%s\n<===\n",devinfo_resp.SerialNumber);
+//
+//EXIT:
+//
+//    if (NULL != soap) {
+//        ONVIF_soap_delete(soap);
+//    }
+//    return result;
+//}
+
+/************************************************************************
+**函数：ONVIF_SetAuthInfo
+**功能：设置认证信息
+**参数：
+        [in] soap     - soap环境变量
+        [in] username - 用户名
+        [in] password - 密码
+**返回：
+        0表明成功，非0表明失败
+**备注：
+************************************************************************/
+static int ONVIF_SetAuthInfo(struct soap *soap, const char *username, const char *password)
+{
+    int result = 0;
+
+    SOAP_ASSERT(NULL != username);
+    SOAP_ASSERT(NULL != password);
+
+    result = soap_wsse_add_UsernameTokenDigest(soap, NULL, username, password);
+    SOAP_CHECK_ERROR(result, soap, "add_UsernameTokenDigest");
+
+EXIT:
+
+    return result;
+}
 
 /************************************************************************
 **函数：ONVIF_GetDeviceInformation
@@ -183,7 +243,9 @@ int ONVIF_GetDeviceInformation(const char *DeviceXAddr)
     struct _tds__GetDeviceInformationResponse   devinfo_resp;
 
     SOAP_ASSERT(NULL != DeviceXAddr);
-SOAP_ASSERT(NULL != (soap = ONVIF_soap_new(SOAP_SOCK_TIMEOUT)));
+    SOAP_ASSERT(NULL != (soap = ONVIF_soap_new(SOAP_SOCK_TIMEOUT)));
+
+    ONVIF_SetAuthInfo(soap, BYUSERNAME, BYPASSWORD);
 
     memset(&devinfo_req, 0x00, sizeof(devinfo_req));
     memset(&devinfo_resp, 0x00, sizeof(devinfo_resp));
