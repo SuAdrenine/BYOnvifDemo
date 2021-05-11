@@ -18,6 +18,8 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     ONVIF_DetectDevice(cb_discovery);
+    
+    
 }
 
 

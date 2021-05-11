@@ -10,7 +10,13 @@
 
 #include "BYCommonDefine.h"
 
+int ONVIF_GetCapabilities(const char *DeviceXAddr);
+int ONVIF_GetSystemDateAndTime(const char *DeviceXAddr);
+void ONVIF_GetHostTimeZone(char *TZ, int sizeTZ);
+int ONVIF_SetSystemDateAndTime(const char *DeviceXAddr);
+int ONVIF_GetStreamUri(const char *MediaXAddr, char *ProfileToken, char *uri, unsigned int sizeuri);
 void cb_discovery(char *DeviceXAddr);
+int ONVIF_SetSystemDateAndTime(const char *DeviceXAddr);
 void ONVIF_DetectDevice(void (*cb)(char *DeviceXAddr));
 int ONVIF_GetDeviceInformation(const char *DeviceXAddr);
 

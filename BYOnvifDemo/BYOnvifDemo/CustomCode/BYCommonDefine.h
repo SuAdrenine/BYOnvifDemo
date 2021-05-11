@@ -17,6 +17,7 @@
 
 #define BYUSERNAME "admin"
 #define BYPASSWORD "ky123456"
+#define ONVIF_ADDRESS_SIZE 100
 
 #define SOAP_ASSERT     assert
 #define SOAP_DBGLOG     printf

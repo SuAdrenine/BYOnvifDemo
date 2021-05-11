@@ -24,7 +24,7 @@
 		EA19D1D426491F3F00BBEA96 /* wsdd.nsmap in Resources */ = {isa = PBXBuildFile; fileRef = EA19D1C726491F3F00BBEA96 /* wsdd.nsmap */; };
 		EA19D1D526491F3F00BBEA96 /* struct_tm.c in Sources */ = {isa = PBXBuildFile; fileRef = EA19D1C926491F3F00BBEA96 /* struct_tm.c */; };
 		EA19D1D626491F3F00BBEA96 /* stdsoap2.c in Sources */ = {isa = PBXBuildFile; fileRef = EA19D1CC26491F3F00BBEA96 /* stdsoap2.c */; };
-		EA19D1DA26491F8900BBEA96 /* BYDeviceInfo.c in Sources */ = {isa = PBXBuildFile; fileRef = EA19D1D926491F8900BBEA96 /* BYDeviceInfo.c */; };
+		EA19D1DA26491F8900BBEA96 /* BYDeviceInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = EA19D1D926491F8900BBEA96 /* BYDeviceInfo.m */; };
 		EA19D1F82649376F00BBEA96 /* mecevp.c in Sources */ = {isa = PBXBuildFile; fileRef = EA19D1F12649376F00BBEA96 /* mecevp.c */; };
 		EA19D1F92649376F00BBEA96 /* wsseapi.c in Sources */ = {isa = PBXBuildFile; fileRef = EA19D1F22649376F00BBEA96 /* wsseapi.c */; };
 		EA19D1FA2649376F00BBEA96 /* smdevp.c in Sources */ = {isa = PBXBuildFile; fileRef = EA19D1F32649376F00BBEA96 /* smdevp.c */; };
@@ -64,7 +64,7 @@
 		EA19D1CB26491F3F00BBEA96 /* soapStub.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = soapStub.h; sourceTree = "<group>"; };
 		EA19D1CC26491F3F00BBEA96 /* stdsoap2.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = stdsoap2.c; sourceTree = "<group>"; };
 		EA19D1D826491F8900BBEA96 /* BYDeviceInfo.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BYDeviceInfo.h; sourceTree = "<group>"; };
-		EA19D1D926491F8900BBEA96 /* BYDeviceInfo.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = BYDeviceInfo.c; sourceTree = "<group>"; };
+		EA19D1D926491F8900BBEA96 /* BYDeviceInfo.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BYDeviceInfo.m; sourceTree = "<group>"; };
 		EA19D1DC26491FB500BBEA96 /* BYCommonDefine.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BYCommonDefine.h; sourceTree = "<group>"; };
 		EA19D1EF2649376F00BBEA96 /* smdevp.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = smdevp.h; sourceTree = "<group>"; };
 		EA19D1F02649376F00BBEA96 /* threads.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = threads.h; sourceTree = "<group>"; };
@@ -165,7 +165,7 @@
 			children = (
 				EA19D1DC26491FB500BBEA96 /* BYCommonDefine.h */,
 				EA19D1D826491F8900BBEA96 /* BYDeviceInfo.h */,
-				EA19D1D926491F8900BBEA96 /* BYDeviceInfo.c */,
+				EA19D1D926491F8900BBEA96 /* BYDeviceInfo.m */,
 			);
 			path = CustomCode;
 			sourceTree = "<group>";
@@ -274,7 +274,7 @@
 				EA19D1A626491EF900BBEA96 /* SceneDelegate.m in Sources */,
 				EA19D1D226491F3F00BBEA96 /* soapClient.c in Sources */,
 				EA19D1D626491F3F00BBEA96 /* stdsoap2.c in Sources */,
-				EA19D1DA26491F8900BBEA96 /* BYDeviceInfo.c in Sources */,
+				EA19D1DA26491F8900BBEA96 /* BYDeviceInfo.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
