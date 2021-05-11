@@ -415,8 +415,8 @@ int ONVIF_GetCapabilities(const char *DeviceXAddr)
 
     SOAP_DBGLOG("===>\nDevice address : %s\n<===\n",rep.Capabilities->Device->XAddr);
     SOAP_DBGLOG("===>\nPTZ address : %s\n<===\n",rep.Capabilities->PTZ->XAddr);
-
-
+    SOAP_DBGLOG("===>\nPTZ address : %s\n<===\n",rep.Capabilities->Media->XAddr);
+    ONVIF_GetProfiles(rep.Capabilities->Media->XAddr);
 EXIT:
 
     if (NULL != soap) {
@@ -424,3 +424,126 @@ EXIT:
     }
     return result;
 }
+
+
+/************************************************************************
+**函数：ONVIF_GetStreamUri
+**功能：获取设备码流地址(RTSP)
+**参数：
+        [in]  MediaXAddr    - 媒体服务地址
+        [in]  ProfileToken  - the media profile token
+        [out] uri           - 返回的地址
+        [in]  sizeuri       - 地址缓存大小
+**返回：
+        0表明成功，非0表明失败
+**备注：
+************************************************************************/
+int ONVIF_GetStreamUri(const char *MediaXAddr, char *ProfileToken, char *uri, unsigned int sizeuri)
+{
+    int result = 0;
+    struct soap *soap = NULL;
+    struct tt__StreamSetup              ttStreamSetup;
+    struct tt__Transport                ttTransport;
+    struct _trt__GetStreamUri           req;
+    struct _trt__GetStreamUriResponse   rep;
+
+    SOAP_ASSERT(NULL != MediaXAddr);
+    SOAP_ASSERT(NULL != uri);
+    memset(uri, 0x00, sizeuri);
+
+    SOAP_ASSERT(NULL != (soap = ONVIF_soap_new(SOAP_SOCK_TIMEOUT)));
+
+    memset(&req, 0x00, sizeof(req));
+    memset(&rep, 0x00, sizeof(rep));
+    memset(&ttStreamSetup, 0x00, sizeof(ttStreamSetup));
+    memset(&ttTransport, 0x00, sizeof(ttTransport));
+    ttStreamSetup.Stream                = tt__StreamType__RTP_Unicast;
+    ttStreamSetup.Transport             = &ttTransport;
+    ttStreamSetup.Transport->Protocol   = tt__TransportProtocol__RTSP;
+    ttStreamSetup.Transport->Tunnel     = NULL;
+    req.StreamSetup                     = &ttStreamSetup;
+    req.ProfileToken                    = ProfileToken;
+
+    ONVIF_SetAuthInfo(soap, BYUSERNAME, BYPASSWORD);
+    result = soap_call___trt__GetStreamUri(soap, MediaXAddr, NULL, &req, &rep);
+    SOAP_CHECK_ERROR(result, soap, "GetServices");
+
+    SOAP_DBGLOG("===>\nGetStreamUri : %s\n<===\n",rep.MediaUri->Uri);
+
+    result = -1;
+    if (NULL != rep.MediaUri) {
+        if (NULL != rep.MediaUri->Uri) {
+            if (sizeuri > strlen(rep.MediaUri->Uri)) {
+                strcpy(uri, rep.MediaUri->Uri);
+                result = 0;
+            } else {
+                SOAP_DBGERR("Not enough cache!\n");
+            }
+        }
+    }
+
+EXIT:
+
+    if (NULL != soap) {
+        ONVIF_soap_delete(soap);
+    }
+
+    return result;
+}
+
+void insertcharatindex(char *str, const char *pch, int pos) {
+    long len = strlen(str);
+    long nlen = strlen(pch);
+    for (long i = len - 1; i >= pos; --i) {
+        *(str + i + nlen) = *(str + i);
+    }
+    for (int n = 0; n < nlen;n++)
+    *(str + pos + n) = *pch++;
+    *(str + len + nlen) = 0;
+}
+
+void append_uri_withauthInfo(const char *uri, int len, const char *username, const char *password, char *uriAuth) {
+    memcpy(uriAuth, uri, len);
+//rtsp://10.10.9.15:554/Streaming/Channels/101?transportmode=unicast&profile=Profile_1
+    insertcharatindex(uriAuth, "@", 7);
+    insertcharatindex(uriAuth, password, 7);
+    insertcharatindex(uriAuth, ":", 7);
+    insertcharatindex(uriAuth, username, 7);
+    SOAP_DBGLOG("===>\nAppend StreamUri : %s\n<===\n",uriAuth);
+}
+
+int ONVIF_GetProfiles(const char *DeviceXAddr) {
+    int result = 0;
+    struct soap *soap = NULL;
+    struct _trt__GetProfiles            req;
+    struct _trt__GetProfilesResponse    rep;
+
+    SOAP_ASSERT(NULL != DeviceXAddr);
+    SOAP_ASSERT(NULL != (soap = ONVIF_soap_new(SOAP_SOCK_TIMEOUT)));
+
+    ONVIF_SetAuthInfo(soap, BYUSERNAME, BYPASSWORD);
+
+    memset(&req, 0x00, sizeof(req));
+    memset(&rep, 0x00, sizeof(rep));
+    result = soap_call___trt__GetProfiles(soap, DeviceXAddr, NULL, &req, &rep);
+
+    char uri[ONVIF_ADDRESS_SIZE] = {0};                                         // 不带认证信息的URI地址
+    char uri_auth[ONVIF_ADDRESS_SIZE + 50] = {0};                               // 带有认证信息的URI地址
+    
+    SOAP_CHECK_ERROR(result, soap, "GetProfiles");
+
+    SOAP_DBGLOG("===>\nProfiles name : %s\n<===\n",rep.Profiles->Name);
+    SOAP_DBGLOG("===>\nProfiles token : %s\n<===\n",rep.Profiles->token);
+
+    ONVIF_GetStreamUri(DeviceXAddr, rep.Profiles->token, uri, sizeof(uri)); // 获取RTSP地址
+    append_uri_withauthInfo(uri, sizeof(uri),BYUSERNAME, BYPASSWORD, uri_auth);
+    
+EXIT:
+
+    if (NULL != soap) {
+        ONVIF_soap_delete(soap);
+    }
+    return result;
+}
+
+
