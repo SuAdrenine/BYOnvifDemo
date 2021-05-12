@@ -20,5 +20,7 @@ void cb_discovery(char *DeviceXAddr);
 int ONVIF_SetSystemDateAndTime(const char *DeviceXAddr);
 void ONVIF_DetectDevice(void (*cb)(char *DeviceXAddr));
 int ONVIF_GetDeviceInformation(const char *DeviceXAddr);
+int ONVIF_PTZStopMove(const char * ptzXAddr, const char * ProfileToken);
+int ONVIF_PTZContinuousMove(const char * ptzXAddr, const char * ProfileToken, enum PTZCMD cmd, float speed);
 
 #endif /* BYDeviceInfo_h */
